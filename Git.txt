@@ -1,0 +1,26 @@
+#Criar nova branch
+git branch "nome da branch"
+
+#Mudar para nova branch
+git checkout "nome da branch"
+
+#Após terminar de fazer as codificações voltar para master
+git checkout master
+
+#Fazer um pull para ver se tem novos atualizações no repositório central
+git push origem master
+
+#Voltar para sua branch
+git checkout "nome da branch"
+
+#Fazer um rebase com a master na sua branch
+git rebase master
+
+#Voltar para a master
+git checout master
+
+#Atualizar a master com suas mudanças
+git merge "nome da branch"
+
+#Atualizar repositório central
+git push origem master
