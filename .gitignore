@@ -1,11 +1,42 @@
-# Compiled class file
-*.class
-
 # Log file
 *.log
 
 # BlueJ files
 *.ctxt
+
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/
+
+*.class
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
@@ -13,6 +44,7 @@
 # Package Files #
 *.jar
 *.war
+<<<<<<< HEAD
 *.nar
 *.ear
 *.zip
