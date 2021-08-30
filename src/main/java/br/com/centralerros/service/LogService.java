@@ -27,7 +27,7 @@ public class LogService {
                 .orElseThrow(() -> new IllegalArgumentException("Token invalido"));
 
         Log log = mapper.map(dto);
-        log.setUsuario(usuario);
+        //log.setUsuario(usuario);
         return logRepository.saveAndFlush(log);
     }
 

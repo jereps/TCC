@@ -13,20 +13,20 @@ public class Autorizacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column
     @NotNull
     private String nome;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "autorizacoes")
-    private Set<Usuario> usuarios;
+    //@ManyToMany(fetch = FetchType.LAZY, mappedBy = "autorizacoes")
+    //private Set<Usuario> usuarios;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -38,12 +38,13 @@ public class Autorizacao {
         this.nome = nome;
     }
 
-    public Set<Usuario> getUsuarios() {
+    /*public Set<Usuario> getUsuarios() {
         return usuarios;
     }
 
     public void setUsuarios(Set<Usuario> usuarios) {
         this.usuarios = usuarios;
     }
+    */
 
 }

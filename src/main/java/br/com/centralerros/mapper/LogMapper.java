@@ -28,7 +28,7 @@ public interface LogMapper {
             @Mapping(source = "titulo", target = "titulo"),
             @Mapping(source = "detalhe", target = "detalhe"),
             @Mapping(source = "createdAt", target = "createdAt"),
-            @Mapping(source = "usuario", target = "usuario"),
+            //@Mapping(source = "usuario", target = "usuario"),
             @Mapping(source = "categoria", target = "categoria"),
             @Mapping(source = "level", target = "level"),
     })

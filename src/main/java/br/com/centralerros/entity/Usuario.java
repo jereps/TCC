@@ -14,17 +14,17 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "nome")
     @NotNull
+    @Column(name = "nome")
     private String nome;
 
-    @Column(name = "email")
-    @NotNull
     @Email
+    @NotNull
+    @Column(name = "email")
     private String email;
 
-    @Column(name = "senha")
     @NotNull
+    @Column(name = "senha")
     private String senha;
 
     @Column(name = "token")

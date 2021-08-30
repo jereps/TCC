@@ -32,8 +32,8 @@ public class Log {
     @CreatedDate
     private LocalDateTime createdAt;
 
-    @ManyToOne
-    private Usuario usuario;
+    //@ManyToOne
+    //private Usuario usuario;
 
     @NotNull
     @Enumerated(value = EnumType.STRING)
@@ -83,6 +83,7 @@ public class Log {
         this.createdAt = createdAt;
     }
 
+    /*
     public Usuario getUsuario() {
         return usuario;
     }
@@ -90,6 +91,7 @@ public class Log {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+    */
 
     public Categoria getCategoria() {
         return categoria;
