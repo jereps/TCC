@@ -25,13 +25,10 @@ target/
 *.iml
 *.ipr
 
-# Gradle:
-.idea/gradle.xml
-.idea/libraries
-
-# From https://github.com/github/gitignore/blob/master/Gradle.gitignore
-.gradle/*
-/build/
+# Gradle
+.gradle
+**/build/
+!src/**/build/
 
 # Ignore Gradle GUI config
 gradle-app.setting
