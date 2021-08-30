@@ -3,38 +3,41 @@ package br.com.centralerros.entity;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+
+import java.math.BigInteger;
 import java.util.Set;
 
 @Entity
+@Table(name = "usuario")
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-    @Column
+    @Column(name = "nome")
     @NotNull
     private String nome;
 
-    @Column
+    @Column(name = "email")
     @NotNull
     @Email
     private String email;
 
-    @Column
+    @Column(name = "senha")
     @NotNull
     private String senha;
 
-    @Column
+    @Column(name = "token")
     private String token;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Autorizacao> autorizacoes;
+    // @ManyToMany(fetch = FetchType.EAGER)
+    // private Set<Autorizacao> autorizacoes;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -70,12 +73,12 @@ public class Usuario {
         this.token = token;
     }
 
-    public Set<Autorizacao> getAutorizacoes() {
-        return autorizacoes;
-    }
+    // public Set<Autorizacao> getAutorizacoes() {
+    //     return autorizacoes;
+    // }
 
-    public void setAutorizacoes(Set<Autorizacao> autorizacoes) {
-        this.autorizacoes = autorizacoes;
-    }
+    // public void setAutorizacoes(Set<Autorizacao> autorizacoes) {
+    //     this.autorizacoes = autorizacoes;
+    // }
 
 }

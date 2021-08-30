@@ -1,6 +1,6 @@
 create database centralerros;
 
-user centralerros;
+use centralerros;
 
 CREATE USER root WITH PASSWORD 'root';
 
