@@ -1,6 +1,6 @@
-  ports:
-    - port: 8080
-      visibility: public
-  tasks:
-    - init: postgresql < DDL.sql
-  image: gitpod/workspace-postgres
+ports:
+  - port: 8080
+    visibility: public
+tasks:
+  - init: psql < DDL.sql
+image: gitpod/workspace-postgres
