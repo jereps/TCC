@@ -2,9 +2,9 @@ create database centralerros;
 
 user centralerros;
 
-create user 'user'@'localhost' identified by '123456';
+CREATE USER root WITH PASSWORD 'root';
 
-grante select, insert, delete, update on centralerros.* to user@'localhost';
+grante select, insert, delete, update on centralerros.* to root@'localhost';
 
 create table autorizacao (
   id    bigserial primary key,
@@ -14,33 +14,33 @@ create table autorizacao (
 create table log (
   id            bigserial primary key,
   origem        varchar(100),
-  titulo        varchar(100)
-  datalhe       text,
-  created_at    timestamptz,
+  titulo        varchar(100),
+  detalhe       text,
+  created_at    timestamp,
   categoria     varchar(100),
-  'level'       varchar(100)
+  "level"       varchar(100)
 );
 
 create table usuario (
   id        bigserial primary key,
   nome      varchar(100),
-  email     varchar(100)
+  email     varchar(100),
   senha     varchar(100),
-  token     vachar(255),
+  token     varchar(255)
 );
 
 create table usuario_autorizacao (
-  user_id           bigserial unsigned not null,
-  autorizacao_id    bigserial unsigned not null
+  user_id           bigserial not null,
+  autorizacao_id    bigserial not null,
   primary key (user_id, autorizacao_id),
-  foreign key aut_usuario_fk (user_id) references usuario(id) on delete restrict on update cascade,
-  foreign key aut_autorizacao_fk (autorizacao_id) references autorizacao(id) on delete restrict on update
+  foreign key (user_id) references usuario(id),
+  foreign key (autorizacao_id) references autorizacao(id)
 );
 
 create table usuario_log (
-  user_id         bigserial unsigned not null,
-  log_id          bigserial unsigned not null
+  user_id         bigserial not null,
+  log_id          bigserial not null,
   primary key (user_id, log_id),
-  foreign key aut_usuario_fk (user_id) references usuario(id) on delete restrict on update cascade,
-  foreign key aut_log_fk (log_id) references log(id) on delete restrict on update
+  foreign key (user_id) references usuario(id),
+  foreign key (log_id) references log(id)
 );
