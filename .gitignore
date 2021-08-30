@@ -25,6 +25,10 @@ target/
 *.iml
 *.ipr
 
+# Gradle:
+.idea/gradle.xml
+.idea/libraries
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
