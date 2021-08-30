@@ -24,13 +24,14 @@ import java.util.List;
 public class LogController {
 
     private LogService logService;
-    private LogMapper mapper;
+    //private LogMapper mapper;
 //    private SecurityService securityService;
 
     @ApiOperation(value = "Enviar logs com token")
     @PostMapping
     private LogRespondeDTO add(@RequestParam(value = "token") String token, @Valid @RequestBody LogDTO dto) {
-        return mapper.map(logService.add(token, dto));
+        //return mapper.map(logService.add(token, dto));
+        return null;
     }
 
     @GetMapping

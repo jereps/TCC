@@ -8,7 +8,6 @@ import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
-@EntityListeners(AuditingEntityListener.class)
 public class Autorizacao {
 
     @Id

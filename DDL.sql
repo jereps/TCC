@@ -1,10 +1,11 @@
 create database centralerros;
 
-use centralerros;
+psql -d centralerros;
 
 CREATE USER root WITH PASSWORD 'root';
 
-grante select, insert, delete, update on centralerros.* to root@'localhost';
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO root;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO root;
 
 create table autorizacao (
   id    serial primary key,
