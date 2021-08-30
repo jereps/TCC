@@ -17,7 +17,6 @@ public class Autorizacao {
 
     @Column
     @NotNull
-    @Size(max=100)
     private String nome;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "autorizacoes")
@@ -46,4 +45,5 @@ public class Autorizacao {
     public void setUsuarios(Set<Usuario> usuarios) {
         this.usuarios = usuarios;
     }
+
 }

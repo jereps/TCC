@@ -17,20 +17,17 @@ public class Log {
 
     @Column
     @NotNull
-    @Size(max = 100)
     private String origem;
 
     @Column
     @NotNull
-    @Size(max = 100)
     private String titulo;
 
     @Column
     @NotNull
-    @Size(max = 500)
     private String detalhe;
 
-    @Column
+    @Column(name = "created_at")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     @CreatedDate
     private LocalDateTime createdAt;

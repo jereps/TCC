@@ -1,13 +1,8 @@
 package br.com.centralerros.entity;
 
-import org.springframework.security.core.GrantedAuthority;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -18,22 +13,18 @@ public class Usuario {
 
     @Column
     @NotNull
-    @Size(max=100)
     private String nome;
 
     @Column
     @NotNull
     @Email
-    @Size(max=100)
     private String email;
 
     @Column
     @NotNull
-    @Size(max=255)
     private String senha;
 
     @Column
-    @Size(max=255)
     private String token;
 
     @ManyToMany(fetch = FetchType.EAGER)
