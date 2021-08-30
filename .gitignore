@@ -46,6 +46,7 @@ gradle-app.setting
 /nbdist/
 /.nb-gradle/
 build/
+bin/
 
 ### VS Code ###
 .vscode/
