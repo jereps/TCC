@@ -20,8 +20,9 @@ public interface LogRepository extends JpaRepository<Log, Integer> {
 
     public Log findOneByCategoria(Enum categoria);
 
-    Page<Log> findAll(Pageable pageable);
+    public Log findOneByCategoriaAndLevel(Enum categoria,Enum level);
 
+    Page<Log> findAll(Pageable pageable);
 
 
 

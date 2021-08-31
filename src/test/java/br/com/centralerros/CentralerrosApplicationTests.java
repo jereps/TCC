@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.HashSet;
 
+import br.com.centralerros.service.LogService;
+import br.com.centralerros.service.UsuarioServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -34,6 +36,12 @@ class CentralerrosApplicationTests {
 
 	@Autowired
 	private AutorizacaoRepository autorizacaoRepo;
+
+	@Autowired
+	private UsuarioServiceImpl userService;
+
+	@Autowired
+	private LogService logService;
 
 	@Test
 	void contextLoads() {
@@ -95,6 +103,13 @@ class CentralerrosApplicationTests {
 	}
 
 	@Test
+	void UsuarioServiceCadastrarTestOk(){
+		userService.cadastrarUsuarioWithAutorizacao("Usuario","1234","usuario@email.com","ROLE");
+		List<Usuario> usuarios = userRepo.findByAutorizacoesNome("ROLE");
+		assertFalse(usuarios.isEmpty());
+	}
+
+	@Test
 	void LogRepositorySaveTestOk(){
 		Log log = new Log();
 		log.setTitulo("teste");
@@ -116,6 +131,18 @@ class CentralerrosApplicationTests {
 		log.setOrigem("novo");
 		logRepo.save(log);
 		assertNotNull(logRepo.findOneByCategoria(Categoria.DEVELOPMENT));
+	}
+
+	@Test
+	void LogRepositoryFindOneByCategoriaAndLevelTestOk(){
+		Log log = new Log();
+		log.setTitulo("teste");
+		log.setCategoria(Categoria.DEVELOPMENT);
+		log.setLevel(Level.DEBUG);
+		log.setDetalhe("teste");
+		log.setOrigem("novo");
+		logRepo.save(log);
+		assertNotNull(logRepo.findOneByCategoriaAndLevel(Categoria.DEVELOPMENT,Level.DEBUG));
 	}
 
 	@Test
@@ -156,6 +183,24 @@ class CentralerrosApplicationTests {
 		logRepo.save(log);
 		List<Log> logs = logRepo.findByUsuarioEmail("usuario@email.com");
 		assertFalse(logs.isEmpty());
+	}
+
+	@Test
+	void LogServiceSaveTestOk(){
+		Usuario user = new Usuario();
+		user.setNome("Usuario");
+		user.setEmail("usuario@email.com");
+		user.setSenha("senha");
+		userRepo.save(user);
+		logService.cadastrarLog("Titulo",Categoria.DEVELOPMENT,Level.DEBUG,"detalhe","origem",user);
+		assertNotNull(logRepo.findByUsuarioEmail("usuario@email.com"));
+	}
+
+	@Test
+	void LogServiceSaveWithNewUserTestOk(){
+		logService.cadastrarLogWithNewUser("Titulo",Categoria.DEVELOPMENT,Level.DEBUG,"detalhe","origem",
+				"Usuario","usuario@email.com","senha");
+		assertNotNull(logRepo.findByUsuarioEmail("usuario@email.com"));
 	}
 
 	@Test
