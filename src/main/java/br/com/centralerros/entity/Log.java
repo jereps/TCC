@@ -32,8 +32,11 @@ public class Log {
     @CreatedDate
     private LocalDateTime createdAt;
 
-    //@ManyToOne
-    //private Usuario usuario;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinTable(name = "usuario_log",
+        joinColumns = { @JoinColumn(name = "log_id") },
+        inverseJoinColumns = { @JoinColumn(name = "user_id ") })
+    private Usuario usuario;
 
     @NotNull
     @Enumerated(value = EnumType.STRING)
