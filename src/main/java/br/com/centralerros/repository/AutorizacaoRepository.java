@@ -8,4 +8,6 @@ import br.com.centralerros.entity.Autorizacao;
 public interface AutorizacaoRepository extends JpaRepository<Autorizacao,Integer>{
     public Autorizacao findByNome(String nome);
 
+    public Autorizacao findByUsuariosEmail(String email);
+
 }

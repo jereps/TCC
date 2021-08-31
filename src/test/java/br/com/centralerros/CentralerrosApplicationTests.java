@@ -6,10 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import java.util.HashSet;
 
 import br.com.centralerros.service.LogService;
-import br.com.centralerros.service.UsuarioServiceImpl;
+import br.com.centralerros.service.LogServiceImpl;
+import br.com.centralerros.service.UsuarioService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,7 +40,7 @@ class CentralerrosApplicationTests {
 	private AutorizacaoRepository autorizacaoRepo;
 
 	@Autowired
-	private UsuarioServiceImpl userService;
+	private UsuarioService userService;
 
 	@Autowired
 	private LogService logService;
@@ -212,10 +214,20 @@ class CentralerrosApplicationTests {
 	}
 
 	@Test
-	void AutorizacaoRepositoryFindName(){
+	void AutorizacaoRepositoryFindNameTestOk(){
 		Autorizacao autorizacao = new Autorizacao();
 		autorizacao.setNome("ROLE_1");
 		autorizacaoRepo.save(autorizacao);
 		assertNotNull(autorizacaoRepo.findByNome("ROLE_1"));
+	}
+
+	@Test
+	void AutorizacaoRepositoryFindUsuarioEmailTestOk(){
+		Autorizacao autorizacao = new Autorizacao();
+		autorizacao.setNome("ROLE_1");
+		autorizacaoRepo.save(autorizacao);
+		Usuario user = userService.cadastrarUsuarioWithAutorizacao("Usuario","senha","usuario@email.com","ROLE_1");
+
+		assertNotNull(autorizacaoRepo.findByUsuariosEmail("usuario@email.com"));
 	}
 }

@@ -13,7 +13,7 @@
 // import br.com.centralerros.mapper.UsuarioMapper;
 
  @Service
- public class UsuarioServiceImpl  {
+ public class UsuarioServiceImpl implements UsuarioService  {
 
      @Autowired
      private UsuarioRepository userRepo;
@@ -26,9 +26,12 @@
 
      @Transactional
      public Usuario cadastrarUsuarioWithAutorizacao(String nome, String senha,String email, String autorizacao){
-         Autorizacao aut = new Autorizacao();
-         aut.setNome(autorizacao);
-         autRepo.save(aut);
+         Autorizacao aut = autRepo.findByNome(autorizacao);
+         if (aut == null) {
+             aut = new Autorizacao();
+             aut.setNome(autorizacao);
+             autRepo.save(aut);
+         }
 
          Usuario user = new Usuario();
          user.setNome(nome);
@@ -41,6 +44,7 @@
          return user;
      }
 
+     @Transactional
      public Usuario cadastrarUsuario(String nome, String senha,String email){
          Usuario user = new Usuario();
          user.setNome(nome);
