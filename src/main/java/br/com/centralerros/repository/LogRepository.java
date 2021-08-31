@@ -9,12 +9,21 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface LogRepository extends JpaRepository<Log, Integer> {
+
+    public List<Log> findByUsuarioNome(String nome);
+
+    public List<Log> findByUsuarioEmail(String email);
 
     public Log findOneByCategoria(Enum categoria);
 
     Page<Log> findAll(Pageable pageable);
+
+
+
 
     Page<Log> findByCategoria(Enum categoria, Pageable pageable);
 

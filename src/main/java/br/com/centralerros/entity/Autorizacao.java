@@ -18,8 +18,11 @@ public class Autorizacao {
     @NotNull
     private String nome;
 
-    //@ManyToMany(fetch = FetchType.LAZY, mappedBy = "autorizacoes")
-    //private Set<Usuario> usuarios;
+//    @ManyToMany
+//    @JoinTable(name = "usuario_autorizacao",
+//            joinColumns = { @JoinColumn(name = "autorizacao_id") },
+//            inverseJoinColumns = { @JoinColumn(name = "user_id") } )
+//    private Set<Usuario> usuarios;
 
     public Integer getId() {
         return id;
@@ -37,13 +40,12 @@ public class Autorizacao {
         this.nome = nome;
     }
 
-    /*public Set<Usuario> getUsuarios() {
-        return usuarios;
-    }
-
-    public void setUsuarios(Set<Usuario> usuarios) {
-        this.usuarios = usuarios;
-    }
-    */
+//    public Set<Usuario> getUsuarios() {
+//        return usuarios;
+//    }
+//
+//    public void setUsuarios(Set<Usuario> usuarios) {
+//        this.usuarios = usuarios;
+//    }
 
 }

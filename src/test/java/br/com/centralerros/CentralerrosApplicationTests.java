@@ -119,6 +119,46 @@ class CentralerrosApplicationTests {
 	}
 
 	@Test
+	void LogRepositoryFindByUsuarioNomeTestOk(){
+		Usuario user = new Usuario();
+		user.setNome("Usuario");
+		user.setEmail("usuario@email.com");
+		user.setSenha("senha");
+		userRepo.save(user);
+		Log log = new Log();
+		log.setTitulo("teste");
+		log.setCategoria(Categoria.DEVELOPMENT);
+		log.setLevel(Level.DEBUG);
+		log.setDetalhe("teste");
+		log.setOrigem("novo");
+		log.setUsuario(new HashSet<Usuario>());
+		log.getUsuario().add(user);
+		logRepo.save(log);
+		List<Log> logs = logRepo.findByUsuarioNome("Usuario");
+		assertFalse(logs.isEmpty());
+	}
+
+	@Test
+	void LogRepositoryFindByUsuarioEmailTestOk(){
+		Usuario user = new Usuario();
+		user.setNome("Usuario");
+		user.setEmail("usuario@email.com");
+		user.setSenha("senha");
+		userRepo.save(user);
+		Log log = new Log();
+		log.setTitulo("teste");
+		log.setCategoria(Categoria.DEVELOPMENT);
+		log.setLevel(Level.DEBUG);
+		log.setDetalhe("teste");
+		log.setOrigem("novo");
+		log.setUsuario(new HashSet<Usuario>());
+		log.getUsuario().add(user);
+		logRepo.save(log);
+		List<Log> logs = logRepo.findByUsuarioEmail("usuario@email.com");
+		assertFalse(logs.isEmpty());
+	}
+
+	@Test
 	void AutorizacaoRepositorySaveTestOk(){
 		Autorizacao autorizacao = new Autorizacao();
 		autorizacao.setNome("ROLE_1");
@@ -133,5 +173,4 @@ class CentralerrosApplicationTests {
 		autorizacaoRepo.save(autorizacao);
 		assertNotNull(autorizacaoRepo.findByNome("ROLE_1"));
 	}
-
 }

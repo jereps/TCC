@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 public class Log {
@@ -32,11 +33,11 @@ public class Log {
     @CreatedDate
     private LocalDateTime createdAt;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "usuario_log",
         joinColumns = { @JoinColumn(name = "log_id") },
         inverseJoinColumns = { @JoinColumn(name = "user_id ") })
-    private Usuario usuario;
+    private Set<Usuario> usuario;
 
     @NotNull
     @Enumerated(value = EnumType.STRING)
@@ -86,16 +87,6 @@ public class Log {
         this.createdAt = createdAt;
     }
 
-    /*
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-    */
-
     public Categoria getCategoria() {
         return categoria;
     }
@@ -110,5 +101,13 @@ public class Log {
 
     public void setLevel(Level level) {
         this.level = level;
+    }
+
+    public Set<Usuario> getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Set<Usuario> usuario) {
+        this.usuario = usuario;
     }
 }
