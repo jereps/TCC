@@ -3,8 +3,6 @@ package br.com.centralerros.entity;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-
-import java.math.BigInteger;
 import java.util.Set;
 
 @Entity
@@ -30,8 +28,11 @@ public class Usuario {
     @Column(name = "token")
     private String token;
 
-    // @ManyToMany(fetch = FetchType.EAGER)
-    // private Set<Autorizacao> autorizacoes;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "usuario_autorizacao",
+        joinColumns = { @JoinColumn(name = "user_id") },
+        inverseJoinColumns = { @JoinColumn(name = "autorizacao_id") } )
+    private Set<Autorizacao> autorizacoes;
 
     public Integer getId() {
         return id;
@@ -73,12 +74,12 @@ public class Usuario {
         this.token = token;
     }
 
-    // public Set<Autorizacao> getAutorizacoes() {
-    //     return autorizacoes;
-    // }
+    public Set<Autorizacao> getAutorizacoes() {
+        return autorizacoes;
+    }
 
-    // public void setAutorizacoes(Set<Autorizacao> autorizacoes) {
-    //     this.autorizacoes = autorizacoes;
-    // }
+    public void setAutorizacoes(Set<Autorizacao> autorizacoes) {
+        this.autorizacoes = autorizacoes;
+    }
 
 }

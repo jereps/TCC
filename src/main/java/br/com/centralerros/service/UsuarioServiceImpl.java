@@ -1,59 +1,64 @@
-package br.com.centralerros.service;
+// package br.com.centralerros.service;
 
-import br.com.centralerros.dto.UsuarioDTO;
-import br.com.centralerros.exception.ExistException;
-import br.com.centralerros.repository.UsuarioRepository;
-import br.com.centralerros.entity.Usuario;
-import br.com.centralerros.mapper.UsuarioMapper;
-import lombok.AllArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+// import br.com.centralerros.dto.UsuarioDTO;
+// import br.com.centralerros.exception.ExistException;
+// import br.com.centralerros.repository.UsuarioRepository;
+// import br.com.centralerros.entity.Usuario;
+// import br.com.centralerros.mapper.UsuarioMapper;
+// import lombok.AllArgsConstructor;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.security.access.prepost.PreAuthorize;
+// import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+// import org.springframework.stereotype.Service;
+// import org.springframework.transaction.annotation.Transactional;
 
-@Service
-@AllArgsConstructor
-public class UsuarioServiceImpl  {
+// import java.util.List;
+// import java.util.Optional;
+// import java.util.UUID;
 
-    private UsuarioRepository usuarioRepository;
-    private UsuarioMapper mapper;
+// @Service
+// @AllArgsConstructor
+// public class UsuarioServiceImpl  {
 
-    @PreAuthorize("isAuthenticated")
-    public Optional<Usuario> findByEmail(String email) {
-        return usuarioRepository.findByEmail(email);
-    }
+//     @Autowired
+//     private UsuarioRepository usuarioRepository;
 
-//    @PreAuthorize("isAuthenticated")
-    public List<Usuario> findAll() {
-        return usuarioRepository.findAll();
-    }
+//     @Autowired
+//     private UsuarioMapper mapper;
 
-    @Transactional
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public Usuario save(UsuarioDTO dto) {
-        validarEmailExists(dto.getEmail());
+//     @PreAuthorize("isAuthenticated")
+//     public Optional<Usuario> findByEmail(String email) {
+//         return usuarioRepository.findByEmail(email);
+//     }
 
-        Usuario user = mapper.map(dto);
-        user.setToken(UUID.randomUUID().toString());
-        user.setSenha(passwordEncoder().encode(dto.getSenha()));
-        user = usuarioRepository.saveAndFlush(user);
-        return user;
-    }
+// //    @PreAuthorize("isAuthenticated")
+//     public List<Usuario> findAll() {
+//         return usuarioRepository.findAll();
+//     }
 
-    private void validarEmailExists(String email) {
-        if (usuarioRepository.findByEmail(email).isPresent()) throw new ExistException("Email já cadastrado");
-    }
+//     @Transactional
+// //    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//     public Usuario save(UsuarioDTO dto) {
+//         validarEmailExists(dto.getEmail());
 
-    public static BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+//         Usuario user = mapper.map(dto);
+//         user.setToken(UUID.randomUUID().toString());
+//         user.setSenha(passwordEncoder().encode(dto.getSenha()));
+//         user = usuarioRepository.saveAndFlush(user);
+//         return user;
+//     }
 
-    @PreAuthorize("isAuthenticated")
-    public Optional<Usuario> findByToken(String token) {
-        return usuarioRepository.findByToken(token);
-    }
-}
+//     private void validarEmailExists(String email) {
+//         if (usuarioRepository.findByEmail(email).isPresent()) throw new ExistException("Email já cadastrado");
+//     }
+
+//     public static BCryptPasswordEncoder passwordEncoder() {
+//         return new BCryptPasswordEncoder();
+//     }
+
+//     @PreAuthorize("isAuthenticated")
+//     public Optional<Usuario> findByToken(String token) {
+//         return usuarioRepository.findByToken(token);
+//     }
+// }
