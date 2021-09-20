@@ -1,5 +1,6 @@
 package br.com.centralerros.dto;
 
+import br.com.centralerros.entity.Autorizacao;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,6 +27,8 @@ public class UsuarioDTO {
 
     @NotNull
     private String senha;
+
+    private Autorizacao autorizacao;
 
     public String getNome() {
         return nome;

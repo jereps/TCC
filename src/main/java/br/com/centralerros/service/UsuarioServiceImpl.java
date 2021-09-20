@@ -1,5 +1,6 @@
  package br.com.centralerros.service;
 
+ import br.com.centralerros.dto.UsuarioDTO;
  import br.com.centralerros.entity.Autorizacao;
  import br.com.centralerros.entity.Usuario;
  import br.com.centralerros.repository.AutorizacaoRepository;
@@ -9,6 +10,8 @@
  import org.springframework.transaction.annotation.Transactional;
 
  import java.util.HashSet;
+ import java.util.List;
+ import java.util.Optional;
 
 // import br.com.centralerros.mapper.UsuarioMapper;
 
@@ -20,9 +23,6 @@
 
      @Autowired
      private AutorizacaoRepository autRepo;
-
-//     @Autowired
-//     private UsuarioMapper mapper;
 
      @Transactional
      public Usuario cadastrarUsuarioWithAutorizacao(String nome, String senha,String email, String autorizacao){
@@ -55,22 +55,38 @@
          return user;
      }
 
+     @Transactional
+     public Usuario cadastrarUsuarioWithAutorizacao(UsuarioDTO userDTO){
+         Autorizacao aut = autRepo.findByNome(userDTO.getAutorizacao().getNome());
+         if (aut == null) {
+             aut = new Autorizacao();
+             aut.setNome(userDTO.getAutorizacao().getNome());
+             autRepo.save(aut);
+         }
+         Usuario user = new Usuario();
+         user.setNome(user.getNome());
+         user.setEmail(user.getEmail());
+         user.setSenha(user.getSenha());
+         user.setAutorizacoes(new HashSet<Autorizacao>());
+         user.getAutorizacoes().add(aut);
 
+         userRepo.save(user);
+         return user;
+     }
 
+     public List<Usuario> findAll() {
+         return userRepo.findAll();
+     }
 
+      public Usuario findByEmail(String email) {
+         return userRepo.findOneByEmail(email);
+     }
 
+     public Usuario atualizarUsuario(UsuarioDTO userDto) {
+         Usuario usuario = userRepo.findOneByEmail(userDto.getEmail());
 
-
-
-
-
-
-
-
-
-
-
-
+         return userRepo.save(usuario);
+     }
 
 
 //     @PreAuthorize("isAuthenticated")
